@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://d3wjquhxmeii5"]
+
+[ext_resource type="Script" uid="uid://sek7j8k5hf34" path="res://scripts/socket.gd" id="1_rlwot"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbrmb"]
+albedo_color = Color(0.2936601, 0.29366007, 0.29366007, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mbrmb"]
+radius = 1.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbrmb"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rlwot"]
+albedo_color = Color(0.27058825, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rlwot"]
+material = SubResource("StandardMaterial3D_rlwot")
+size = Vector3(0.8, 0.1, 0.8)
+
+[node name="Socket" type="Node3D" unique_id=868451419]
+script = ExtResource("1_rlwot")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=201555239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+height = 1.0
+material = SubResource("StandardMaterial3D_mbrmb")
+
+[node name="SnapZone" type="Area3D" parent="." unique_id=253424778 groups=["socket_zone"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapZone" unique_id=330120425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_mbrmb")
+
+[node name="DiveZone" type="Area3D" parent="." unique_id=1805711412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 1.2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiveZone" unique_id=1745861968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_mbrmb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DiveZone" unique_id=1691162825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.026823752, 0)
+mesh = SubResource("BoxMesh_rlwot")

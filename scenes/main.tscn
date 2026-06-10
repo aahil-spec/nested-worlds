@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://2kff3v22v4f4"]
+
+[ext_resource type="Script" uid="uid://dqr7qqu3eirbw" path="res://scripts/main.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://dtf7huqqquft8" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://d3wjquhxmeii5" path="res://scenes/socket.tscn" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://df1l757yibrmo" path="res://scenes/orb.tscn" id="3_sugp2"]
+
+[sub_resource type="Environment" id="Environment_o5qli"]
+background_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
+albedo_color = Color(0.5059426, 7.52043e-07, 2.4065375e-07, 1)
+
+[sub_resource type="Animation" id="Animation_o5qli"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0wfyh"]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sugp2"]
+_data = {
+&"RESET": SubResource("Animation_o5qli"),
+&"fade": SubResource("Animation_0wfyh")
+}
+
+[node name="Main" type="Node3D" unique_id=837530081 node_paths=PackedStringArray("player", "hub_entry", "red_entry", "fade_animator")]
+script = ExtResource("1_0wfyh")
+player = NodePath("Player")
+hub_entry = NodePath("Worlds/HubWorld/EntryPad")
+red_entry = NodePath("Worlds/RedWorld/EntryPad")
+fade_animator = NodePath("UI/FadeRect/FadeAnimator")
+
+[node name="Player" parent="." unique_id=17381297 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6178856, 1.5042574, 8.262743)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=306218406]
+transform = Transform3D(1, 0, 0, 0, -0.011501461, 0.9999339, 0, -0.9999339, -0.011501461, 0, 7.7965107, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1388941139]
+environment = SubResource("Environment_o5qli")
+
+[node name="Worlds" type="Node3D" parent="." unique_id=1487572861]
+
+[node name="HubWorld" type="Node3D" parent="Worlds" unique_id=1211617157]
+
+[node name="Floor" type="CSGBox3D" parent="Worlds/HubWorld" unique_id=1626617458]
+use_collision = true
+size = Vector3(20, 1, 20)
+
+[node name="EntryPad" type="Marker3D" parent="Worlds/HubWorld" unique_id=974885883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
+
+[node name="Socket" parent="Worlds/HubWorld" unique_id=868451419 instance=ExtResource("3_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RedWorld" type="Node3D" parent="Worlds" unique_id=792713333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, 0, 0)
+
+[node name="Floor" type="CSGBox3D" parent="Worlds/RedWorld" unique_id=1080872867]
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_o5qli")
+
+[node name="EntryPad" type="Marker3D" parent="Worlds/RedWorld" unique_id=1540762534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=136269747]
+
+[node name="FadeRect" type="ColorRect" parent="UI" unique_id=1572658614]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="FadeAnimator" type="AnimationPlayer" parent="UI/FadeRect" unique_id=1127536770]
+libraries/ = SubResource("AnimationLibrary_sugp2")
+
+[node name="Orb" parent="." unique_id=1734739972 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1997.3447, 0.8, -0.49580765)
+
+[node name="Orb2" parent="." unique_id=740977318 groups=["orb_zone", "socket_zone"] instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.182613, 0.8, -0.49580765)

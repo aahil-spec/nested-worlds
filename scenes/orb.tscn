@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://df1l757yibrmo"]
+
+[ext_resource type="Script" uid="uid://d00wibe38uoea" path="res://scripts/orb.gd" id="1_ktqa0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j06i"]
+emission_enabled = true
+emission = Color(0.46236122, 0.5148067, 3.85046e-07, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ktqa0"]
+material = SubResource("StandardMaterial3D_1j06i")
+radius = 0.3
+height = 0.6
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ubfm6"]
+
+[node name="Orb" type="Node3D" unique_id=1734739972]
+script = ExtResource("1_ktqa0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=269650458]
+mesh = SubResource("SphereMesh_ktqa0")
+
+[node name="InteractZone" type="Area3D" parent="." unique_id=1803310624 groups=["orb_zone"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractZone" unique_id=839022101]
+shape = SubResource("SphereShape3D_ubfm6")
