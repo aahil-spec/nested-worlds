@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dywf6skhdhry6"]
+
+[ext_resource type="Script" uid="uid://bgkkkd6wh3q1f" path="res://scripts/door.gd" id="1_hpvv5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5f452"]
+albedo_color = Color(0.0627451, 0.0627451, 0.79607844, 1)
+
+[node name="Door" type="Node3D" unique_id=215014185]
+script = ExtResource("1_hpvv5")
+
+[node name="DoorMesh" type="CSGBox3D" parent="." unique_id=494054280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+use_collision = true
+size = Vector3(3, 4, 0.5)
+material = SubResource("StandardMaterial3D_5f452")

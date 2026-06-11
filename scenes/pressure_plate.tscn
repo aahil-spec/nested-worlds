@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c82lxqt6r6lx4"]
+
+[ext_resource type="Script" uid="uid://bc0jw7h136fp1" path="res://scripts/pressure_plate.gd" id="1_ct5vs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtofl"]
+albedo_color = Color(0.0001221032, 0.054428376, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r34r6"]
+size = Vector3(2, 1, 2)
+
+[node name="PressurePlate" type="Area3D" unique_id=514733040]
+script = ExtResource("1_ct5vs")
+
+[node name="PlateBase" type="CSGBox3D" parent="." unique_id=1712156143]
+size = Vector3(2, 0.1, 2)
+material = SubResource("StandardMaterial3D_xtofl")
+
+[node name="ButtonMesh" type="CSGBox3D" parent="." unique_id=1036650324]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+size = Vector3(1.6, 0.2, 1.6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2040035489]
+shape = SubResource("BoxShape3D_r34r6")

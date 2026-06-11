@@ -37,6 +37,8 @@ func _process(delta):
 			pick_up_orb()
 #orb function
 func pick_up_orb():
+	if held_orb!=null:
+		return
 	var touching_areas=interact_reach.get_overlapping_areas()
 	
 	for area in touching_areas:
@@ -50,11 +52,18 @@ func pick_up_orb():
 			orb.reparent(hold_position)
 			orb.position=Vector3.ZERO
 			held_orb=orb
+			if orb.world_id=="red_world":
+				GameState.set_state("carrying_red_orb",true)
 			return
 #drop orb
 func drop_orb():
+	if held_orb==null:
+		return
 	var orb=held_orb
 	held_orb=null
+	
+	if orb.world_id=="red_world":
+		GameState.set_state("carrying_red_orb",false)
 
 	var touching_areas=interact_reach.get_overlapping_areas()
 	for area in touching_areas:

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dpvn411xwtoj2"]
+
+[ext_resource type="Script" uid="uid://bpjq3yl11y0nc" path="res://scripts/red_bridge.gd" id="1_mieol"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrqkq"]
+transparency = 1
+albedo_color = Color(1, 0.22352941, 0.17254902, 0.45882353)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_crjd5"]
+size = Vector3(2.5, 0.2, 6)
+
+[node name="RedBridge" type="StaticBody3D" unique_id=1398792709]
+script = ExtResource("1_mieol")
+
+[node name="BridgeMesh" type="CSGBox3D" parent="." unique_id=2050772891]
+use_collision = true
+size = Vector3(2.5, 0.2, 6)
+material = SubResource("StandardMaterial3D_qrqkq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1999969650]
+shape = SubResource("BoxShape3D_crjd5")
