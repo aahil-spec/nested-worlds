@@ -44,10 +44,17 @@ func pick_up_orb():
 	for area in touching_areas:
 		if area.is_in_group("orb_zone"):
 			var orb=area.get_parent()
-			var orb_parent=orb.get_parent()
 			
+			if orb.world_id == WorldManager.current_world_id:
+				return
+			
+			var orb_parent=orb.get_parent()
 			if orb_parent and "socketed_orb" in orb_parent:
 				orb_parent.socketed_orb=null
+				
+			var orb_mesh=orb.get_node_or_null("MeshInstance3D")
+			if orb_mesh:
+				orb_mesh.material_override=null
 				
 			orb.reparent(hold_position)
 			orb.position=Vector3.ZERO
