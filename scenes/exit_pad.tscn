@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cqvxkmugmonqj"]
+
+[ext_resource type="Script" uid="uid://ciulqx8v70nn3" path="res://scripts/exit_pad.gd" id="1_ro4fh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bn51m"]
+albedo_color = Color(0.3569411, 0.70762867, 1.3091564e-05, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ro4fh"]
+size = Vector3(1.5, 0.1, 1.5)
+
+[node name="ExitPad" type="Area3D" unique_id=713389487]
+script = ExtResource("1_ro4fh")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=734813425]
+size = Vector3(1.5, 0.1, 1.5)
+material = SubResource("StandardMaterial3D_bn51m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=163980443]
+shape = SubResource("BoxShape3D_ro4fh")

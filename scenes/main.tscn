@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dtf7huqqquft8" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://d3wjquhxmeii5" path="res://scenes/socket.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://df1l757yibrmo" path="res://scenes/orb.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cqvxkmugmonqj" path="res://scenes/exit_pad.tscn" id="4_tbgi4"]
 
 [sub_resource type="Environment" id="Environment_o5qli"]
 background_mode = 2
@@ -56,7 +57,7 @@ red_entry = NodePath("Worlds/RedWorld/EntryPad")
 fade_animator = NodePath("UI/FadeRect/FadeAnimator")
 
 [node name="Player" parent="." unique_id=17381297 instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6178856, 1.5042574, 8.262743)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.504, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=306218406]
 transform = Transform3D(1, 0, 0, 0, -0.011501461, 0.9999339, 0, -0.9999339, -0.011501461, 0, 7.7965107, 0)
@@ -76,7 +77,10 @@ size = Vector3(20, 1, 20)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
 
 [node name="Socket" parent="Worlds/HubWorld" unique_id=868451419 instance=ExtResource("3_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 0.5, 8.039545)
+
+[node name="Orb2" parent="Worlds/HubWorld" unique_id=740977318 groups=["orb_zone", "socket_zone"] instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.182613, 0.8, -0.49580765)
 
 [node name="RedWorld" type="Node3D" parent="Worlds" unique_id=792713333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, 0, 0)
@@ -88,6 +92,9 @@ material = SubResource("StandardMaterial3D_o5qli")
 
 [node name="EntryPad" type="Marker3D" parent="Worlds/RedWorld" unique_id=1540762534]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
+
+[node name="ExitPad" parent="Worlds/RedWorld" unique_id=713389487 instance=ExtResource("4_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.458827, 0)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=136269747]
 
@@ -102,9 +109,3 @@ metadata/_edit_use_anchors_ = true
 
 [node name="FadeAnimator" type="AnimationPlayer" parent="UI/FadeRect" unique_id=1127536770]
 libraries/ = SubResource("AnimationLibrary_sugp2")
-
-[node name="Orb" parent="." unique_id=1734739972 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1997.3447, 0.8, -0.49580765)
-
-[node name="Orb2" parent="." unique_id=740977318 groups=["orb_zone", "socket_zone"] instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.182613, 0.8, -0.49580765)

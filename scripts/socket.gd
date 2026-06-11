@@ -9,8 +9,8 @@ func _ready():
 	
 
 func _on_body_entered(body):
-	if body.is_in_group("player") or body.name=="Player":
+	if body is CharacterBody3D:
 		if socketed_orb !=null:
 			var target_world=socketed_orb.world_id
-			WorldManager.dive(target_world)
+			WorldManager.dive(target_world,self)
 			
