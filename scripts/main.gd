@@ -8,6 +8,8 @@ extends Node3D
 
 var is_transitioning:bool=false
 
+func _ready() -> void:
+	CheckpointManager.save(player.global_position,"HubWorld")
 func execute_world_transfer(target_world_id:String,target_socket:Node3D):
 	if is_transitioning:
 		return
@@ -23,6 +25,7 @@ func execute_world_transfer(target_world_id:String,target_socket:Node3D):
 		player.global_position=target_socket.global_position
 		player.global_position.x+=1.5
 		player.global_position.y=1.0
+		CheckpointManager.save(player.global_position,target_world_id)
 	else:
 		if target_world_id=="red_world":
 			player.global_position=red_entry.global_position

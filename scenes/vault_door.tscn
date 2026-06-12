@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://2i8udfe1ys7e"]
+
+[ext_resource type="Script" uid="uid://n27dv342y1kh" path="res://scripts/vault_door.gd" id="1_iq1xm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27in4"]
+transparency = 1
+albedo_color = Color(0.35006446, 0.35006374, 0.3500639, 1)
+
+[node name="VaultDoor" type="Node3D" unique_id=1843638876]
+script = ExtResource("1_iq1xm")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1046558960]
+transform = Transform3D(0.99904823, 0, 0.043619387, 0, 1, 0, -0.043619387, 0, 0.99904823, 0, 0, 0)
+use_collision = true
+size = Vector3(4, 5, 1)
+material = SubResource("StandardMaterial3D_27in4")

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 WorldManager="*uid://dbuguoltovsl5"
 GameState="*uid://qod7iu1k3wcm"
+CheckpointManager="*uid://b2oe6qb227pc5"
 
 [editor_plugins]
 

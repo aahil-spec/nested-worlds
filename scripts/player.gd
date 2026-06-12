@@ -11,7 +11,12 @@ var gravity:float=ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #orb holding
 var held_orb: Node3D=null
+
+enum State{ALIVE,DEAD,DIVING}
+var state:State=State.ALIVE
 func _physics_process(delta):
+	if state !=State.ALIVE:
+		return
 	if not is_on_floor():
 		velocity.y-=gravity*delta
 	#jump
@@ -86,3 +91,19 @@ func drop_orb():
 	orb.reparent(main_scene)
 	orb.global_position=global_position
 	orb.global_position.y=1.0
+func die():
+	if state== State.DEAD:
+		return
+		
+	state = State.DEAD
+	var fade_animator = get_tree().current_scene.fade_animator
+	fade_animator.play("fade")
+	await fade_animator.animation_finished
+	
+	CheckpointManager.respawn(self)
+	
+	fade_animator.play_backwards("fade")
+	
+func _on_interact_area_body_entered(body:Node3D):
+	if body.is_in_group("hazard"):
+		die()

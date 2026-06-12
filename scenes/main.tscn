@@ -5,14 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://d3wjquhxmeii5" path="res://scenes/socket.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://df1l757yibrmo" path="res://scenes/orb.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cqvxkmugmonqj" path="res://scenes/exit_pad.tscn" id="4_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://dywf6skhdhry6" path="res://scenes/door.tscn" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://dpvn411xwtoj2" path="res://scenes/red_bridge.tscn" id="6_tipki"]
 [ext_resource type="Material" uid="uid://r6jn01ope8fu" path="res://resource/blue_paint.tres" id="7_85g3d"]
 [ext_resource type="PackedScene" uid="uid://c82lxqt6r6lx4" path="res://scenes/pressure_plate.tscn" id="7_o6xl0"]
+[ext_resource type="Script" uid="uid://cwnflv1ng8w8" path="res://scripts/win_zone.gd" id="9_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://2i8udfe1ys7e" path="res://scenes/vault_door.tscn" id="9_trceg"]
 [ext_resource type="Material" uid="uid://gciv61oh8r3u" path="res://resource/red_paint.tres" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://di4hkgulitbuc" path="res://scenes/death_plane.tscn" id="10_trceg"]
+[ext_resource type="PackedScene" uid="uid://d0iof0t8ol20j" path="res://scenes/win_screen.tscn" id="12_trceg"]
 
 [sub_resource type="Environment" id="Environment_o5qli"]
 background_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8y0u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
 albedo_color = Color(0.62448967, 0.017314509, 0.1772303, 1)
@@ -94,9 +99,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.182613, 0.8, -0.49580765)
 [node name="MeshInstance3D" parent="Worlds/HubWorld/RedOrb" index="0" unique_id=269650458]
 material_override = ExtResource("10_choun")
 
-[node name="Door" parent="Worlds/HubWorld" unique_id=215014185 instance=ExtResource("5_tefeu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6767817, 0, -9.687946)
-
 [node name="IslandTwo" type="CSGBox3D" parent="Worlds/HubWorld" unique_id=702364821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.900957)
 use_collision = true
@@ -115,6 +117,19 @@ power_id = "blue_power"
 
 [node name="MeshInstance3D" parent="Worlds/HubWorld/BlueOrb" index="0" unique_id=269650458]
 material_override = ExtResource("7_85g3d")
+
+[node name="WinZone" type="Area3D" parent="Worlds/HubWorld" unique_id=450417437]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.435127, -6.1375604)
+script = ExtResource("9_eb6dy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Worlds/HubWorld/WinZone" unique_id=1104785105]
+shape = SubResource("BoxShape3D_a8y0u")
+
+[node name="VaultDoor" parent="Worlds/HubWorld" unique_id=1843638876 instance=ExtResource("9_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.800466, 3.205122, -12.107322)
+
+[node name="DeathPlane" parent="Worlds/HubWorld" unique_id=1275088670 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 
 [node name="RedWorld" type="Node3D" parent="Worlds" unique_id=792713333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, 0, 0)
@@ -135,6 +150,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8544922, 0.6785798, -5.578
 
 [node name="orb" parent="Worlds/RedWorld" unique_id=1570915360 instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823452, 0)
+
+[node name="DeathPlane" parent="Worlds/RedWorld" unique_id=299942303 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 
 [node name="BlueWorld" type="Node3D" parent="Worlds" unique_id=1676064052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4000, 0, 0)
@@ -161,6 +179,13 @@ size = Vector3(20, 1, 10)
 [node name="RedBridge" parent="Worlds/BlueWorld" unique_id=1449738394 instance=ExtResource("6_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.330412)
 
+[node name="PressurePlate" parent="Worlds/BlueWorld" unique_id=814875321 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.6773977, -11)
+state_key = "blue_plate_pressed"
+
+[node name="DeathPlane" parent="Worlds/BlueWorld" unique_id=884215438 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+
 [node name="UI" type="CanvasLayer" parent="." unique_id=136269747]
 
 [node name="FadeRect" type="ColorRect" parent="UI" unique_id=1572658614]
@@ -174,6 +199,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="FadeAnimator" type="AnimationPlayer" parent="UI/FadeRect" unique_id=1127536770]
 libraries/ = SubResource("AnimationLibrary_sugp2")
+
+[node name="WinScreen" parent="UI" unique_id=2080342245 instance=ExtResource("12_trceg")]
 
 [node name="OrbViewport" type="SubViewport" parent="." unique_id=1374722492]
 render_target_update_mode = 4
