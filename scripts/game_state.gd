@@ -1,6 +1,9 @@
 extends Node
 
-
+var story_flags: Dictionary={
+	"hub_plaque_entry_heard":false,
+	"forge_echo_lyra_01_heard":false
+}
 #signal brodcast
 signal state_changed(key:String,new_value:bool)
 

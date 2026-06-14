@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 WorldManager="*uid://dbuguoltovsl5"
 GameState="*uid://qod7iu1k3wcm"
 CheckpointManager="*uid://b2oe6qb227pc5"
+DialogueManager="*uid://cvteh8ynuo1bu"
 
 [editor_plugins]
 
@@ -28,6 +29,7 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 [global_group]
 
 player=""
+dialogue_label=""
 
 [input]
 
@@ -89,5 +91,3 @@ interact={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"

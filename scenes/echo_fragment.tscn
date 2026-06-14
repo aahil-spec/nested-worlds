@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dlg0irkcb3hro"]
+
+[ext_resource type="Script" uid="uid://8nektmcs0oi" path="res://scripts/echo_fragment.gd" id="1_x8v8p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bbye4"]
+radius = 3.0
+
+[node name="EchoFragment" type="Node3D" unique_id=1395473077]
+script = ExtResource("1_x8v8p")
+
+[node name="TriggerZone" type="Area3D" parent="." unique_id=479082769]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerZone" unique_id=188907049]
+shape = SubResource("SphereShape3D_bbye4")

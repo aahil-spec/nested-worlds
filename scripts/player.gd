@@ -36,6 +36,9 @@ func _physics_process(delta):
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if Input.is_action_just_pressed("interact"):
+		if DialogueManager.is_playing:
+			DialogueManager.advance()
+			return
 		if held_orb !=null:
 			drop_orb()
 		else:

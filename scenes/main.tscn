@@ -12,15 +12,44 @@
 [ext_resource type="PackedScene" uid="uid://2i8udfe1ys7e" path="res://scenes/vault_door.tscn" id="9_trceg"]
 [ext_resource type="Material" uid="uid://gciv61oh8r3u" path="res://resource/red_paint.tres" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://di4hkgulitbuc" path="res://scenes/death_plane.tscn" id="10_trceg"]
+[ext_resource type="PackedScene" uid="uid://dlg0irkcb3hro" path="res://scenes/echo_fragment.tscn" id="11_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://d0iof0t8ol20j" path="res://scenes/win_screen.tscn" id="12_trceg"]
-
-[sub_resource type="Environment" id="Environment_o5qli"]
-background_mode = 2
+[ext_resource type="Shader" uid="uid://c8pov6nbe6snr" path="res://shaders/main.gdshader" id="14_a8y0u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a8y0u"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_trceg"]
+sky_top_color = Color(0.101960786, 0.05882353, 0, 1)
+sky_horizon_color = Color(1, 0.8352941, 0.5019608, 1)
+ground_bottom_color = Color(0.23921569, 0.16862746, 0, 1)
+
+[sub_resource type="Sky" id="Sky_a8y0u"]
+sky_material = SubResource("ProceduralSkyMaterial_trceg")
+
+[sub_resource type="Environment" id="Environment_jkv2x"]
+background_mode = 2
+sky = SubResource("Sky_a8y0u")
+ambient_light_color = Color(1, 0.8352941, 0.5019608, 1)
+ambient_light_energy = 0.5
+glow_enabled = true
+glow_bloom = 0.2
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.008
+volumetric_fog_albedo = Color(1, 0.9098039, 0.0627451, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
 albedo_color = Color(0.62448967, 0.017314509, 0.1772303, 1)
+
+[sub_resource type="Environment" id="Environment_trceg"]
+background_mode = 1
+background_color = Color(0.050980393, 0, 0, 1)
+ambient_light_color = Color(0.54509807, 0, 0, 1)
+ambient_light_energy = 0.8
+glow_enabled = true
+glow_bloom = 0.5
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.04
+volumetric_fog_albedo = Color(1, 0.13333334, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
 albedo_color = Color(0.105882354, 0.44313726, 0.6039216, 1)
@@ -62,6 +91,21 @@ _data = {
 &"fade": SubResource("Animation_0wfyh")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_muem4"]
+shader = ExtResource("14_a8y0u")
+shader_parameter/vignette_color = Color(0, 0, 0, 0)
+shader_parameter/intensity = 0.4
+
+[sub_resource type="Environment" id="Environment_jbj1t"]
+background_mode = 1
+background_color = Color(0, 0.03137255, 0.078431375, 1)
+ambient_light_color = Color(0, 0.2, 0.4, 1)
+ambient_light_energy = 0.3
+ssr_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.06
+volumetric_fog_albedo = Color(0, 0.0627451, 0.2509804, 1)
+
 [node name="Main" type="Node3D" unique_id=837530081 node_paths=PackedStringArray("player", "hub_entry", "red_entry", "blue_entry", "fade_animator")]
 script = ExtResource("1_0wfyh")
 player = NodePath("Player")
@@ -71,33 +115,35 @@ blue_entry = NodePath("Worlds/BlueWorld/EntryPad")
 fade_animator = NodePath("UI/FadeRect/FadeAnimator")
 
 [node name="Player" parent="." unique_id=17381297 instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.504, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.504, 31.478851)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=306218406]
 transform = Transform3D(1, 0, 0, 0, -0.011501461, 0.9999339, 0, -0.9999339, -0.011501461, 0, 7.7965107, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1388941139]
-environment = SubResource("Environment_o5qli")
 
 [node name="Worlds" type="Node3D" parent="." unique_id=1487572861]
 
 [node name="HubWorld" type="Node3D" parent="Worlds" unique_id=1211617157]
 
 [node name="Floor" type="CSGBox3D" parent="Worlds/HubWorld" unique_id=1626617458]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.19543406, 0, 22.24044)
 use_collision = true
-size = Vector3(20, 1, 4)
+size = Vector3(24.229248, 1, 6.987549)
 
 [node name="EntryPad" type="Marker3D" parent="Worlds/HubWorld" unique_id=974885883]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
 
 [node name="Socket" parent="Worlds/HubWorld" unique_id=868451419 instance=ExtResource("3_jyhfs")]
-transform = Transform3D(0.9994243, 0, 0.03392282, 0, 1, 0, -0.03392282, 0, 0.9994243, -6.156986, 0.6919751, -15.033502)
+transform = Transform3D(0.999974, 0, 0.0071732365, 0, 1, 0, -0.0071732365, 0, 0.999974, 2.5361845, 0.6919751, 27.42642)
 
 [node name="RedOrb" parent="Worlds/HubWorld" unique_id=740977318 groups=["orb_zone", "socket_zone"] instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.182613, 0.8, -0.49580765)
 
 [node name="MeshInstance3D" parent="Worlds/HubWorld/RedOrb" index="0" unique_id=269650458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.098885, 0, 29.04867)
 material_override = ExtResource("10_choun")
+
+[node name="CollisionShape3D" parent="Worlds/HubWorld/RedOrb/InteractZone" parent_id_path=PackedInt32Array(740977318, 1803310624) index="0" unique_id=839022101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.078245, 0, 28.983118)
 
 [node name="IslandTwo" type="CSGBox3D" parent="Worlds/HubWorld" unique_id=702364821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.900957)
@@ -105,10 +151,7 @@ use_collision = true
 size = Vector3(20, 1, 10)
 
 [node name="RedBridge" parent="Worlds/HubWorld" unique_id=1398792709 instance=ExtResource("6_tipki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4526124, 0.49815297, -4.9288464)
-
-[node name="BlueSocket" parent="Worlds/HubWorld" unique_id=1382178913 instance=ExtResource("3_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8694906, 0.87963724, -1.7044907)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3, 0.06315136, 0.49815297, 1.1520219)
 
 [node name="BlueOrb" parent="Worlds/HubWorld" unique_id=1734739972 instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9058056, 1.184063, -1.4940853)
@@ -130,6 +173,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.800466, 3.205122, -12.10732
 
 [node name="DeathPlane" parent="Worlds/HubWorld" unique_id=1275088670 instance=ExtResource("10_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/HubWorld" unique_id=1388941139]
+environment = SubResource("Environment_jkv2x")
+
+[node name="EchoFragment" parent="Worlds/HubWorld" unique_id=1395473077 instance=ExtResource("11_jkv2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53928566, -0.053355694, 31.386398)
+dialogue_id = "hub_plaque_entry"
 
 [node name="RedWorld" type="Node3D" parent="Worlds" unique_id=792713333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, 0, 0)
@@ -153,6 +203,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823452, 0)
 
 [node name="DeathPlane" parent="Worlds/RedWorld" unique_id=299942303 instance=ExtResource("10_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/RedWorld" unique_id=120636460]
+environment = SubResource("Environment_trceg")
+
+[node name="BlueSocket" parent="Worlds/RedWorld" unique_id=72264646 instance=ExtResource("3_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0643501, 0.87963724, 21.075878)
 
 [node name="BlueWorld" type="Node3D" parent="Worlds" unique_id=1676064052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4000, 0, 0)
@@ -202,10 +258,38 @@ libraries/ = SubResource("AnimationLibrary_sugp2")
 
 [node name="WinScreen" parent="UI" unique_id=2080342245 instance=ExtResource("12_trceg")]
 
+[node name="VignetteRect" type="ColorRect" parent="UI" unique_id=2039291446 groups=["vignette"]]
+material = SubResource("ShaderMaterial_muem4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogueBox" type="PanelContainer" parent="UI" unique_id=874332677]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogueLabel" type="Label" parent="UI/DialogueBox" unique_id=1265574239 groups=["dialogue_label"]]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="OrbViewport" type="SubViewport" parent="." unique_id=1374722492]
 render_target_update_mode = 4
 
 [node name="OrbCamera" type="Camera3D" parent="OrbViewport" unique_id=210323757]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1576050285]
+environment = SubResource("Environment_jbj1t")
 
 [editable path="Worlds/HubWorld/RedOrb"]
 [editable path="Worlds/HubWorld/BlueOrb"]
