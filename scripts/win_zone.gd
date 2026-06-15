@@ -7,7 +7,7 @@ func _ready():
 func _on_body_enetered(body:Node):
 	if body is CharacterBody3D:
 		var win_screen=get_tree().current_scene.get_node("UI/WinScreen")
-		win_screen.visivle=true
+		win_screen.visible=true
 		
 		body.set_process(false)
 		body.set_physics_process(false)

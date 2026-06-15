@@ -39,11 +39,12 @@ func _apply_environment(world_id:String):
 	var target_env=null
 	if world_id=="HubWorld":
 		target_env=main_scene.get_node_or_null("Worlds/HubWorld/WorldEnvironment")
-	elif world_id=="redworld":
+	elif world_id=="red_world":
 		target_env=main_scene.get_node_or_null("Worlds/RedWorld/WorldEnvironment")
-	elif world_id=="blueworld":
+	elif world_id=="blue_world":
 		target_env=main_scene.get_node_or_null("Worlds/BlueWorld/WorldEnvironment")
-		
+	elif world_id=="blue_micro_world":
+		target_env=main_scene.get_node_or_null("Worlds/BlueWorld/WorldEnvironment")
 	if target_env and active_env_node:
 		active_env_node.environment=target_env.environment
 		

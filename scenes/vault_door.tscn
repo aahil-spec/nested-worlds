@@ -4,7 +4,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27in4"]
 transparency = 1
-albedo_color = Color(0.35006446, 0.35006374, 0.3500639, 1)
+albedo_color = Color(0.29954746, 0.29954746, 0.29954743, 0.6392157)
 
 [node name="VaultDoor" type="Node3D" unique_id=1843638876]
 script = ExtResource("1_iq1xm")

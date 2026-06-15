@@ -39,6 +39,13 @@ func _process(delta):
 		if DialogueManager.is_playing:
 			DialogueManager.advance()
 			return
+		var touching_areas=interact_reach.get_overlapping_areas()
+		for area in touching_areas:
+			if area.is_in_group("interactable"):
+				var interactable_object=area.get_parent()
+				if interactable_object.has_method("interact"):
+					interactable_object.interact()
+					return
 		if held_orb !=null:
 			drop_orb()
 		else:

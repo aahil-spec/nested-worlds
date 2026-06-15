@@ -23,7 +23,7 @@ func execute_world_transfer(target_world_id:String,target_socket:Node3D):
 	
 	if target_socket!=null:
 		player.global_position=target_socket.global_position
-		player.global_position.x+=1.5
+		player.global_position.z-=1.5
 		player.global_position.y=1.0
 		CheckpointManager.save(player.global_position,target_world_id)
 	else:
@@ -33,7 +33,15 @@ func execute_world_transfer(target_world_id:String,target_socket:Node3D):
 			player.global_position=blue_entry.global_position
 		elif target_world_id=="HubWorld":
 			player.global_position=hub_entry.global_position
-		
+		elif target_world_id=="blue_micro_world":
+			var micro_entry=get_node("Worlds/BlueMicroWorld/EntryPad")
+			player.global_position=micro_entry.global_position
+		elif target_world_id=="green_world":
+			var green_entry=get_node("Worlds/GreenWorld/EntryPad")
+			player.global_position=green_entry.global_position
+		elif target_world_id=="void_world":
+			var void_entry=get_node("Worlds/VoidWorld/EntryPad")
+			player.global_position=void_entry.global_position
 	fade_animator.play_backwards("fade")
 	player.set_process(true)
 	player.set_physics_process(true)

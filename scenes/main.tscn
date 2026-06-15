@@ -12,9 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://2i8udfe1ys7e" path="res://scenes/vault_door.tscn" id="9_trceg"]
 [ext_resource type="Material" uid="uid://gciv61oh8r3u" path="res://resource/red_paint.tres" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://di4hkgulitbuc" path="res://scenes/death_plane.tscn" id="10_trceg"]
+[ext_resource type="PackedScene" uid="uid://d1kfdk8lmqpvr" path="res://scenes/lever.tscn" id="11_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://dlg0irkcb3hro" path="res://scenes/echo_fragment.tscn" id="11_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://d0iof0t8ol20j" path="res://scenes/win_screen.tscn" id="12_trceg"]
 [ext_resource type="Shader" uid="uid://c8pov6nbe6snr" path="res://shaders/main.gdshader" id="14_a8y0u"]
+[ext_resource type="Script" uid="uid://cpc0tccyhgmuc" path="res://scripts/glass_case.gd" id="15_muem4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a8y0u"]
 
@@ -53,6 +55,10 @@ volumetric_fog_albedo = Color(1, 0.13333334, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
 albedo_color = Color(0.105882354, 0.44313726, 0.6039216, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muem4"]
+transparency = 1
+albedo_color = Color(0.63539076, 0.63539076, 0.63539076, 0.28235295)
 
 [sub_resource type="Animation" id="Animation_o5qli"]
 length = 0.001
@@ -125,25 +131,15 @@ transform = Transform3D(1, 0, 0, 0, -0.011501461, 0.9999339, 0, -0.9999339, -0.0
 [node name="HubWorld" type="Node3D" parent="Worlds" unique_id=1211617157]
 
 [node name="Floor" type="CSGBox3D" parent="Worlds/HubWorld" unique_id=1626617458]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.19543406, 0, 22.24044)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7266383, -0.025018692, 22.10851)
 use_collision = true
-size = Vector3(24.229248, 1, 6.987549)
+size = Vector3(24.229248, 1, 11.950439)
 
 [node name="EntryPad" type="Marker3D" parent="Worlds/HubWorld" unique_id=974885883]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
 
 [node name="Socket" parent="Worlds/HubWorld" unique_id=868451419 instance=ExtResource("3_jyhfs")]
 transform = Transform3D(0.999974, 0, 0.0071732365, 0, 1, 0, -0.0071732365, 0, 0.999974, 2.5361845, 0.6919751, 27.42642)
-
-[node name="RedOrb" parent="Worlds/HubWorld" unique_id=740977318 groups=["orb_zone", "socket_zone"] instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.182613, 0.8, -0.49580765)
-
-[node name="MeshInstance3D" parent="Worlds/HubWorld/RedOrb" index="0" unique_id=269650458]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.098885, 0, 29.04867)
-material_override = ExtResource("10_choun")
-
-[node name="CollisionShape3D" parent="Worlds/HubWorld/RedOrb/InteractZone" parent_id_path=PackedInt32Array(740977318, 1803310624) index="0" unique_id=839022101]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.078245, 0, 28.983118)
 
 [node name="IslandTwo" type="CSGBox3D" parent="Worlds/HubWorld" unique_id=702364821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.900957)
@@ -153,23 +149,15 @@ size = Vector3(20, 1, 10)
 [node name="RedBridge" parent="Worlds/HubWorld" unique_id=1398792709 instance=ExtResource("6_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3, 0.06315136, 0.49815297, 1.1520219)
 
-[node name="BlueOrb" parent="Worlds/HubWorld" unique_id=1734739972 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9058056, 1.184063, -1.4940853)
-world_id = "blue_world"
-power_id = "blue_power"
-
-[node name="MeshInstance3D" parent="Worlds/HubWorld/BlueOrb" index="0" unique_id=269650458]
-material_override = ExtResource("7_85g3d")
-
 [node name="WinZone" type="Area3D" parent="Worlds/HubWorld" unique_id=450417437]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.435127, -6.1375604)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8001254, -13.493108)
 script = ExtResource("9_eb6dy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Worlds/HubWorld/WinZone" unique_id=1104785105]
 shape = SubResource("BoxShape3D_a8y0u")
 
 [node name="VaultDoor" parent="Worlds/HubWorld" unique_id=1843638876 instance=ExtResource("9_trceg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.800466, 3.205122, -12.107322)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0.6313987, 2.84838, 10.430675)
 
 [node name="DeathPlane" parent="Worlds/HubWorld" unique_id=1275088670 instance=ExtResource("10_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
@@ -180,6 +168,69 @@ environment = SubResource("Environment_jkv2x")
 [node name="EchoFragment" parent="Worlds/HubWorld" unique_id=1395473077 instance=ExtResource("11_jkv2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53928566, -0.053355694, 31.386398)
 dialogue_id = "hub_plaque_entry"
+
+[node name="RedOrb" parent="Worlds/HubWorld" unique_id=1734739972 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0571591, 28.725195)
+
+[node name="MeshInstance3D" parent="Worlds/HubWorld/RedOrb" index="0" unique_id=269650458]
+surface_material_override/0 = ExtResource("10_choun")
+
+[node name="GreenWorld" type="Node3D" parent="Worlds" unique_id=1310208881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6000, 0, 0)
+
+[node name="Floor" type="CSGBox3D" parent="Worlds/GreenWorld" unique_id=1493708439]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7266383, -0.025018692, 22.10851)
+use_collision = true
+size = Vector3(24.229248, 1, 11.950439)
+
+[node name="EntryPad" type="Marker3D" parent="Worlds/GreenWorld" unique_id=1560851333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
+
+[node name="DeathPlane" parent="Worlds/GreenWorld" unique_id=625447326 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/GreenWorld" unique_id=277472025]
+environment = SubResource("Environment_jkv2x")
+
+[node name="VoidWorld" type="Node3D" parent="Worlds" unique_id=2006675478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8000, 0, 0)
+
+[node name="Floor" type="CSGBox3D" parent="Worlds/VoidWorld" unique_id=1742790566]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7266383, -0.025018692, 22.10851)
+use_collision = true
+size = Vector3(24.229248, 1, 11.950439)
+
+[node name="EntryPad" type="Marker3D" parent="Worlds/VoidWorld" unique_id=698205390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
+
+[node name="DeathPlane" parent="Worlds/VoidWorld" unique_id=609681583 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/VoidWorld" unique_id=1513397177]
+environment = SubResource("Environment_jkv2x")
+
+[node name="BlueMicroWorld" type="Node3D" parent="Worlds" unique_id=297455693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10000, 0, 0)
+
+[node name="Lever" parent="Worlds/BlueMicroWorld" unique_id=644434233 instance=ExtResource("11_jbj1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.812757)
+
+[node name="Floor" type="CSGBox3D" parent="Worlds/BlueMicroWorld" unique_id=283585945]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7266383, -0.025018692, 22.10851)
+use_collision = true
+size = Vector3(24.229248, 1, 11.950439)
+
+[node name="EntryPad" type="Marker3D" parent="Worlds/BlueMicroWorld" unique_id=2145436075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23925781, 5.681964, 22.02047)
+
+[node name="DeathPlane" parent="Worlds/BlueMicroWorld" unique_id=231941779 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/BlueMicroWorld" unique_id=381922004]
+environment = SubResource("Environment_jkv2x")
+
+[node name="ExitPad" parent="Worlds/BlueMicroWorld" unique_id=713389487 instance=ExtResource("4_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48854303, 12.117043)
 
 [node name="RedWorld" type="Node3D" parent="Worlds" unique_id=792713333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, 0, 0)
@@ -192,14 +243,11 @@ material = SubResource("StandardMaterial3D_o5qli")
 [node name="EntryPad" type="Marker3D" parent="Worlds/RedWorld" unique_id=1540762534]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
 
-[node name="ExitPad" parent="Worlds/RedWorld" unique_id=713389487 instance=ExtResource("4_tbgi4")]
+[node name="ExitPad" parent="Worlds/RedWorld" unique_id=734052212 instance=ExtResource("4_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.458827, 0)
 
 [node name="PressurePlate" parent="Worlds/RedWorld" unique_id=514733040 instance=ExtResource("7_o6xl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8544922, 0.6785798, -5.5785666)
-
-[node name="orb" parent="Worlds/RedWorld" unique_id=1570915360 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823452, 0)
 
 [node name="DeathPlane" parent="Worlds/RedWorld" unique_id=299942303 instance=ExtResource("10_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
@@ -208,7 +256,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 environment = SubResource("Environment_trceg")
 
 [node name="BlueSocket" parent="Worlds/RedWorld" unique_id=72264646 instance=ExtResource("3_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0643501, 0.87963724, 21.075878)
+transform = Transform3D(-0.07880714, 0, 0.9968899, 0, 1, 0, -0.9968899, 0, -0.07880714, -1.064331, 0.87963724, 7.0617914)
+
+[node name="BlueOrb" parent="Worlds/RedWorld" unique_id=218453924 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9058056, 1.184063, -1.4940853)
+world_id = "blue_world"
+power_id = "blue_power"
+
+[node name="MeshInstance3D" parent="Worlds/RedWorld/BlueOrb" index="0" unique_id=269650458]
+material_override = ExtResource("7_85g3d")
 
 [node name="BlueWorld" type="Node3D" parent="Worlds" unique_id=1676064052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4000, 0, 0)
@@ -225,7 +281,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.57782173, -8.820556)
 
 [node name="Orb" parent="Worlds/BlueWorld" unique_id=1336964174 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823452, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.01416, 0.823452, 0)
+world_id = "green_world"
 
 [node name="BlueIslandTwo" type="CSGBox3D" parent="Worlds/BlueWorld" unique_id=1537693935]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
@@ -241,6 +298,23 @@ state_key = "blue_plate_pressed"
 
 [node name="DeathPlane" parent="Worlds/BlueWorld" unique_id=884215438 instance=ExtResource("10_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+
+[node name="Socket" parent="Worlds/BlueWorld" unique_id=88496198 instance=ExtResource("3_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55758905, -13.32612)
+
+[node name="Orb2" parent="Worlds/BlueWorld" unique_id=1052405416 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.048584, 1.194324, -11.500179)
+world_id = "blue_micro_world"
+
+[node name="Orb3" parent="Worlds/BlueWorld" unique_id=441944447 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2177734, 1.194324, 0.33922386)
+world_id = "blue_micro_world"
+
+[node name="GlassCase" type="CSGBox3D" parent="Worlds/BlueWorld" unique_id=884510645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.073242, 0.94197464, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_muem4")
+script = ExtResource("15_muem4")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=136269747]
 
@@ -292,4 +366,4 @@ render_target_update_mode = 4
 environment = SubResource("Environment_jbj1t")
 
 [editable path="Worlds/HubWorld/RedOrb"]
-[editable path="Worlds/HubWorld/BlueOrb"]
+[editable path="Worlds/RedWorld/BlueOrb"]
