@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://boh2mhqncvoig" path="res://scripts/win_screen.gd" id="1_wv5lq"]
 
-[node name="WinScreen" type="Control" unique_id=2080342245]
+[node name="WinScreen" type="Control" unique_id=2080342245 groups=["win_screen"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
