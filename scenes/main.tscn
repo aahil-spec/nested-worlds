@@ -233,7 +233,7 @@ plate_symbol = "star"
 
 [node name="Orb" parent="Worlds/GreenWorld" unique_id=312219763 instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3007813, 0.646893, 27.561996)
-world_id = "HubWorld"
+world_id = "void_world"
 
 [node name="Socket" parent="Worlds/GreenWorld" unique_id=1764912202 instance=ExtResource("3_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5254421, 34.609604)

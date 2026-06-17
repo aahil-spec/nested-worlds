@@ -2,18 +2,23 @@ extends CharacterBody3D
 
 @export var speed: float =5.0
 @export var jump_velocity:float=4.5
-
+@export var mouse_sensitivity:float=0.002
 var gravity:float=ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #interact
 @onready var hold_position:Marker3D=$HoldPosition
 @onready var interact_reach:Area3D=$InteractReach
+@onready var camera:Camera3D=$CameraRig/Camera3D
+@onready var anim_player:AnimationPlayer=$Character/AnimationPlayer
 
 #orb holding
 var held_orb: Node3D=null
 
 enum State{ALIVE,DEAD,DIVING}
 var state:State=State.ALIVE
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _physics_process(delta):
 	if state !=State.ALIVE:
 		return
@@ -23,16 +28,21 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y=jump_velocity
 	#walking
-	var input_dir=Input.get_vector("ui_left","ui_right","ui_up","ui_down")
-	var direction=(transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
+	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if direction:
-		velocity.x=direction.x*speed
-		velocity.z=direction.z*speed
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+		
+		$Character/Node.rotation.y = lerp_angle($Character/Node.rotation.y, atan2(-input_dir.x, -input_dir.y), 10.0 * delta)
+		
 	else:
-		velocity.x=move_toward(velocity.x,0,speed)
-		velocity.z=move_toward(velocity.z,0,speed)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+		
 	move_and_slide()
+	update_animation()
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if Input.is_action_just_pressed("interact"):
@@ -117,3 +127,25 @@ func die():
 func _on_interact_area_body_entered(body:Node3D):
 	if body.is_in_group("hazard"):
 		die()
+func _input(event: InputEvent):
+	if event is InputEventMouseMotion and Input.get_mouse_mode()==Input.MOUSE_MODE_CAPTURED:
+		rotate_y(-event.relative.x*mouse_sensitivity)
+		
+		camera.rotate_x(-event.relative.y*mouse_sensitivity)
+		camera.rotation.x=clamp(camera.rotation.x,deg_to_rad(-80),deg_to_rad(80))
+	if Input.is_action_just_pressed("ui_cancel"):
+		if Input.get_mouse_mode()==Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+func update_animation():
+	if not is_on_floor():
+		if velocity.y>0:
+			anim_player.play("Jump")
+		else:
+			anim_player.play("Falling")
+	else:
+		if abs(velocity.x)>0.1 or abs(velocity.z)>0.1:
+			anim_player.play("Run")
+		else:
+			anim_player.play("Idle")
