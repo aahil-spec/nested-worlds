@@ -8,3 +8,4 @@ func interact():
 	is_pulled=true
 	GameState.set_state("blue_case_unlocked",true)
 	rotation_degrees.x-=45
+	$LeverSound.play()

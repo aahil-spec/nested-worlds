@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://clddx3g14utrg"
+path="res://.godot/imported/freesoundsxx-running-on-concrete-268478.mp3-9f56f27408b781e6feac0ab61ce8be5d.mp3str"
+
+[deps]
+
+source_file="res://sound effects/freesoundsxx-running-on-concrete-268478.mp3"
+dest_files=["res://.godot/imported/freesoundsxx-running-on-concrete-268478.mp3-9f56f27408b781e6feac0ab61ce8be5d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

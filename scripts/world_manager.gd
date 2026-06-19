@@ -5,7 +5,12 @@ var socket_stack:Array=[]
 #tracks which world the player is in 
 var current_world_id:String="HubWorld"
 
-func dive(target_world_id:String,source_socket:Node3D):
+func dive(target_world_id:String, source_socket:Node3D):
+	# 🚨 THE FIX: Look inside the Main scene to find and play the portal sound!
+	var main_node = get_tree().root.get_node_or_null("Main")
+	if main_node and main_node.has_node("PortalSound"):
+		main_node.get_node("PortalSound").play()
+		
 	recursion_stack.append(current_world_id)
 	socket_stack.append(source_socket)
 	current_world_id=target_world_id

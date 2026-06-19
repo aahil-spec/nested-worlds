@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dpvn411xwtoj2"]
 
 [ext_resource type="Script" uid="uid://bpjq3yl11y0nc" path="res://scripts/red_bridge.gd" id="1_mieol"]
+[ext_resource type="AudioStream" uid="uid://cx33ih0p56pv8" path="res://sound effects/u_y3wk5ympz8-rock-stone-slide-304550.mp3" id="2_crjd5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrqkq"]
 transparency = 1
@@ -18,3 +19,6 @@ material = SubResource("StandardMaterial3D_qrqkq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1999969650]
 shape = SubResource("BoxShape3D_crjd5")
+
+[node name="MoveSound" type="AudioStreamPlayer3D" parent="." unique_id=444417198]
+stream = ExtResource("2_crjd5")

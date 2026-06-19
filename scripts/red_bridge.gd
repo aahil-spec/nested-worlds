@@ -16,3 +16,7 @@ func _on_global_state_changed(key:String,new_value:bool):
 		visible=new_value
 		
 		collision_shape.disabled=!new_value
+		$MoveSound.play()
+		
+		
+		

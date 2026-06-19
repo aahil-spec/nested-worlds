@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c5m87y3dbbxwm" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://dn1rg71rnw5oc" path="res://3d models/character.gltf" id="2_g2els"]
+[ext_resource type="AudioStream" uid="uid://b436y1bxsn3y" path="res://sound effects/bestuploadsever67aryan-jump-sound-531048.mp3" id="3_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://bhsrpguhl0wy4" path="res://sound effects/yodguard-drop-or-pickup-item-1-387916.mp3" id="4_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://b2hud3imcmi5f" path="res://sound effects/freesound_community-item_respawn-91422.mp3" id="5_fjrip"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vyb7"]
 radius = 0.49658203
@@ -15,6 +18,61 @@ script = ExtResource("1_3vyb7")
 
 [node name="Character" parent="." unique_id=623576023 instance=ExtResource("2_g2els")]
 transform = Transform3D(-0.007, 0, -6.119594e-10, 0, 0.007, 0, 6.119594e-10, 0, -0.007, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Character/AuxScene/Node" parent_id_path=PackedInt32Array(623576023, 1901323700) index="0" unique_id=621587715]
+bones/0/position = Vector3(0.46634984, 207.30466, -1.8537989)
+bones/0/rotation = Quaternion(-0.03118358, -0.046513885, -0.029327303, 0.99799997)
+bones/1/rotation = Quaternion(-0.02095163, 0.011152606, 0.028627127, 0.9993084)
+bones/2/rotation = Quaternion(0.03866874, 0.002041202, 0.009959411, 0.99920034)
+bones/3/rotation = Quaternion(0.09144529, 0.003184372, 0.0023018057, 0.9958024)
+bones/4/rotation = Quaternion(0.13082884, -0.0013575251, -0.010181037, 0.99135184)
+bones/5/rotation = Quaternion(-0.066444695, 0.008056925, -0.003913825, 0.9977499)
+bones/26/rotation = Quaternion(-0.5601888, -0.40417972, 0.510355, -0.51221585)
+bones/27/rotation = Quaternion(0.5683378, 0.16892739, 0.18538184, 0.7836385)
+bones/28/rotation = Quaternion(4.2263892e-08, 6.32917e-08, 0.012735036, 0.99991894)
+bones/29/rotation = Quaternion(0.048301928, -0.28477946, 0.02683078, 0.9569994)
+bones/30/rotation = Quaternion(0.1365363, -0.0038359165, -0.022920834, 0.9903625)
+bones/31/rotation = Quaternion(0.15125848, -5.2692485e-08, -0.0154651115, 0.9883733)
+bones/32/rotation = Quaternion(0.15993659, 5.4831617e-08, -0.0163525, 0.9869919)
+bones/34/rotation = Quaternion(0.20981714, -0.05958624, 0.20754845, 0.9535984)
+bones/35/rotation = Quaternion(-0.14267512, 0.0865969, -0.24056047, 0.95617753)
+bones/36/rotation = Quaternion(-0.12102188, -0.07554136, 0.024032231, 0.98947954)
+bones/38/rotation = Quaternion(0.066221885, 0.00073323987, 0.008446373, 0.9977689)
+bones/39/rotation = Quaternion(0.1509945, -7.78673e-08, -0.01543897, 0.9884141)
+bones/40/rotation = Quaternion(0.07008368, 2.5276673e-08, -0.007165572, 0.9975154)
+bones/42/rotation = Quaternion(0.18325809, -0.0046531837, -0.031412903, 0.9825519)
+bones/43/rotation = Quaternion(0.18139191, 4.732282e-08, -0.018546125, 0.983236)
+bones/44/rotation = Quaternion(0.15521644, 2.7968778e-08, -0.015869819, 0.98775303)
+bones/46/rotation = Quaternion(0.23387823, -0.0035056719, -0.04895471, 0.97102636)
+bones/47/rotation = Quaternion(0.15126143, 3.7718564e-08, -0.0154655, 0.9883728)
+bones/48/rotation = Quaternion(0.14350095, 6.318441e-08, -0.0146720195, 0.9895415)
+bones/54/rotation = Quaternion(0.5659029, -0.4036965, 0.5488903, 0.4642225)
+bones/55/rotation = Quaternion(0.48041034, -0.26178747, -0.23597044, 0.80311346)
+bones/56/rotation = Quaternion(8.606229e-08, 4.3246764e-08, -0.058380656, 0.9982944)
+bones/57/rotation = Quaternion(0.05902541, 0.17508726, -0.0059572738, 0.982764)
+bones/58/rotation = Quaternion(0.13051692, 0.0036897913, 0.018908316, 0.99125886)
+bones/59/rotation = Quaternion(0.15154627, 5.5391865e-08, 0.012328996, 0.98837334)
+bones/60/rotation = Quaternion(0.16024096, -5.577749e-08, 0.013036412, 0.9869918)
+bones/62/rotation = Quaternion(0.2137644, 0.06538372, -0.22566855, 0.9482107)
+bones/63/rotation = Quaternion(-0.14407785, -0.07616983, 0.2772198, 0.94688386)
+bones/64/rotation = Quaternion(-0.15519416, 0.0746785, -0.02603326, 0.98471326)
+bones/66/rotation = Quaternion(0.05951197, -0.0009914315, -0.01098224, 0.9981668)
+bones/67/rotation = Quaternion(0.15128882, -5.7007128e-08, 0.012308168, 0.988413)
+bones/68/rotation = Quaternion(0.070216976, 4.449612e-08, 0.0057124714, 0.9975154)
+bones/70/rotation = Quaternion(0.17745459, 0.0045015006, 0.026440097, 0.9837635)
+bones/71/rotation = Quaternion(0.18173693, 1.1446535e-07, 0.014785151, 0.983236)
+bones/72/rotation = Quaternion(0.15551196, -4.116737e-08, 0.012651696, 0.9877531)
+bones/74/rotation = Quaternion(0.22849804, 0.0034009381, 0.0429645, 0.9725899)
+bones/75/rotation = Quaternion(0.1515493, -1.2924138e-06, 0.012320948, 0.9883729)
+bones/76/rotation = Quaternion(0.14376627, -2.1856977e-08, 0.011696673, 0.98954254)
+bones/88/rotation = Quaternion(0.13562751, 0.07603769, 0.98501873, -0.074576326)
+bones/89/rotation = Quaternion(-0.13475639, -0.014667632, 0.042792313, 0.98984563)
+bones/90/rotation = Quaternion(0.4296296, -0.04898499, -0.022942003, 0.9013837)
+bones/91/rotation = Quaternion(0.3989699, -0.013111609, -0.04595017, 0.9157181)
+bones/100/rotation = Quaternion(-0.09074518, -0.0039680954, 0.9953222, -0.032912593)
+bones/101/rotation = Quaternion(-0.090610154, 0.084307596, -0.03753963, 0.9916012)
+bones/102/rotation = Quaternion(0.46660215, 0.04644678, -0.020191636, 0.8830161)
+bones/103/rotation = Quaternion(0.41052714, 0.048426453, -0.019714342, 0.9103482)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1153703158]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3175354, 0)
@@ -33,5 +91,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3769851, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractReach" unique_id=1194127765]
 shape = SubResource("SphereShape3D_3vyb7")
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=265762180]
+stream = ExtResource("3_qlg0r")
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="." unique_id=1774387792]
+stream = ExtResource("4_tuyoq")
+
+[node name="DropSound" type="AudioStreamPlayer" parent="." unique_id=208885773]
+stream = ExtResource("4_tuyoq")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1330377365]
+stream = ExtResource("5_fjrip")
 
 [editable path="Character"]

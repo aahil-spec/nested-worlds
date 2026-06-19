@@ -10,6 +10,11 @@ var gravity:float=ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var interact_reach:Area3D=$InteractReach
 @onready var camera:Camera3D=$CameraRig/Camera3D
 @onready var anim_player:AnimationPlayer=$Character/AnimationPlayer
+#sound
+@onready var jump_sfx:AudioStreamPlayer=$JumpSound
+@onready var pickup_sfx:AudioStreamPlayer=$PickupSound
+@onready var drop_sfx:AudioStreamPlayer=$DropSound
+@onready var death_sfx:AudioStreamPlayer=$DeathSound
 
 #orb holding
 var held_orb: Node3D=null
@@ -27,9 +32,11 @@ func _physics_process(delta):
 	#jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y=jump_velocity
+		jump_sfx.play()
 	#walking
 	var input_dir=Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 	var direction=(transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
+	
 	
 	if direction:
 		velocity.x=direction.x*speed
@@ -41,7 +48,9 @@ func _physics_process(delta):
 		velocity.z=move_toward(velocity.z,0,speed)
 		
 	move_and_slide()
+
 	update_animation()
+	
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if Input.is_action_just_pressed("interact"):
@@ -84,6 +93,7 @@ func pick_up_orb():
 			orb.position=Vector3.ZERO
 			held_orb=orb
 			GameState.set_state("carrying_any_orb",true)
+			$PickupSound.play()
 			return
 #drop orb
 func drop_orb():
@@ -103,16 +113,19 @@ func drop_orb():
 				orb.reparent(socket)
 				orb.global_position=socket.global_position
 				orb.global_position.y=1.8
+				$DropSound.play()
 				return
 	var main_scene=get_tree().current_scene
 	orb.reparent(main_scene)
 	orb.global_position=global_position
 	orb.global_position.y=1.0
+	$DropSound.play()
 func die():
 	if state== State.DEAD:
 		return
 		
 	state = State.DEAD
+	$DeathSound.play()
 	var fade_animator = get_tree().current_scene.fade_animator
 	fade_animator.play("fade")
 	await fade_animator.animation_finished

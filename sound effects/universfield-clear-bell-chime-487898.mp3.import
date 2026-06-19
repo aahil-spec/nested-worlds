@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b31sq7pq5yo5v"
+path="res://.godot/imported/universfield-clear-bell-chime-487898.mp3-a40a3755243e9538de2a86eb2df1a1df.mp3str"
+
+[deps]
+
+source_file="res://sound effects/universfield-clear-bell-chime-487898.mp3"
+dest_files=["res://.godot/imported/universfield-clear-bell-chime-487898.mp3-a40a3755243e9538de2a86eb2df1a1df.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

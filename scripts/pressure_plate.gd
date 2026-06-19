@@ -6,8 +6,6 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node):
-	print("🚨 THE PLATE WAS TOUCHED BY: ", body.name)
-	
 	if not body is CharacterBody3D:
 		return
 	if body is CharacterBody3D:
@@ -15,4 +13,5 @@ func _on_body_entered(body: Node):
 			var brain=get_tree().get_first_node_in_group("sequence_manager")
 			if brain:brain.press_plate(plate_symbol)
 		GameState.set_state(state_key,true)
+		$StepSound.play()
 		

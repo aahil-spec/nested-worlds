@@ -18,6 +18,10 @@
 [ext_resource type="Shader" uid="uid://c8pov6nbe6snr" path="res://shaders/main.gdshader" id="14_a8y0u"]
 [ext_resource type="Script" uid="uid://cpc0tccyhgmuc" path="res://scripts/glass_case.gd" id="15_muem4"]
 [ext_resource type="Script" uid="uid://ekj3x5avtk17" path="res://scripts/puzzle_manager.gd" id="17_0ld40"]
+[ext_resource type="AudioStream" uid="uid://k3gnwgxxl1eb" path="res://sound effects/freesound_community-plate-rack_5-79456.mp3" id="17_jscy8"]
+[ext_resource type="AudioStream" uid="uid://bdyyivx5t7x3w" path="res://sound effects/freesound_community-buzz-buzz-95806.mp3" id="18_jscy8"]
+[ext_resource type="AudioStream" uid="uid://b31sq7pq5yo5v" path="res://sound effects/universfield-clear-bell-chime-487898.mp3" id="19_pm3ni"]
+[ext_resource type="AudioStream" uid="uid://cmx3u0e8ki4vg" path="res://sound effects/dragon-studio-whoosh-cinematic-376875.mp3" id="23_pm3ni"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_trceg"]
 sky_top_color = Color(0.101960786, 0.05882353, 0, 1)
@@ -114,16 +118,6 @@ _data = {
 shader = ExtResource("14_a8y0u")
 shader_parameter/vignette_color = Color(0, 0, 0, 0)
 shader_parameter/intensity = 0.4
-
-[sub_resource type="Environment" id="Environment_jbj1t"]
-background_mode = 1
-background_color = Color(0, 0.03137255, 0.078431375, 1)
-ambient_light_color = Color(0, 0.2, 0.4, 1)
-ambient_light_energy = 0.3
-ssr_enabled = true
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.06
-volumetric_fog_albedo = Color(0, 0.0627451, 0.2509804, 1)
 
 [node name="Main" type="Node3D" unique_id=837530081 node_paths=PackedStringArray("player", "hub_entry", "red_entry", "blue_entry", "fade_animator")]
 script = ExtResource("1_0wfyh")
@@ -356,6 +350,7 @@ script = ExtResource("13_0ld40")
 [node name="Orb" parent="Worlds/GreenWorld" unique_id=312219763 instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0009766, 2.791792, 23.886898)
 world_id = "void_world"
+power_id = ""
 
 [node name="Socket" parent="Worlds/GreenWorld" unique_id=1764912202 instance=ExtResource("3_jyhfs")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.5254421, 65.53513)
@@ -363,8 +358,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/GreenWorld" unique_id=1028044149]
 environment = SubResource("Environment_jkv2x")
 
-[node name="PuzzleManager" type="Node3D" parent="Worlds/GreenWorld" unique_id=1322581319]
+[node name="PuzzleManager" type="Node3D" parent="Worlds/GreenWorld" unique_id=1322581319 node_paths=PackedStringArray("hub_orb")]
 script = ExtResource("17_0ld40")
+hub_orb = NodePath("../Orb")
 
 [node name="SunPlate" parent="Worlds/GreenWorld/PuzzleManager" unique_id=514733040 instance=ExtResource("7_o6xl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.519043, 0.49342728, 23.306656)
@@ -381,6 +377,15 @@ plate_symbol = "moon"
 [node name="StarPlate" parent="Worlds/GreenWorld/PuzzleManager" unique_id=651956841 instance=ExtResource("7_o6xl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5293975, 30.651485)
 plate_symbol = "star"
+
+[node name="CorrectSound" type="AudioStreamPlayer" parent="Worlds/GreenWorld/PuzzleManager" unique_id=1492021412]
+stream = ExtResource("17_jscy8")
+
+[node name="FailSound" type="AudioStreamPlayer" parent="Worlds/GreenWorld/PuzzleManager" unique_id=2140541432]
+stream = ExtResource("18_jscy8")
+
+[node name="VictorySound" type="AudioStreamPlayer" parent="Worlds/GreenWorld/PuzzleManager" unique_id=993278782]
+stream = ExtResource("19_pm3ni")
 
 [node name="VoidWorld" type="Node3D" parent="Worlds" unique_id=2006675478]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8000, 0, 0)
@@ -437,6 +442,7 @@ state_key = "game_won"
 [node name="Orb" parent="Worlds/VoidWorld" unique_id=2063772755 instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1746616, -7.538064)
 world_id = "HubWorld"
+power_id = ""
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=136269747]
 
@@ -484,8 +490,8 @@ render_target_update_mode = 4
 
 [node name="OrbCamera" type="Camera3D" parent="OrbViewport" unique_id=210323757]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1576050285]
-environment = SubResource("Environment_jbj1t")
+[node name="PortalSound" type="AudioStreamPlayer" parent="." unique_id=1402669547]
+stream = ExtResource("23_pm3ni")
 
 [editable path="Worlds/HubWorld/RedOrb"]
 [editable path="Worlds/RedWorld/BlueOrb"]
