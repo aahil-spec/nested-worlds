@@ -38,7 +38,7 @@ space bar to jump over things
 shift key is very important you use shift key to skip the story
 also you use the same shift key to pick up a orb and also drop a orb
 mouse to look around everywhere
-
+use esc key to lock and unlock the cursor
 COOL FEATURES I ADDED
 i added a photoreal hdri sky and crazy lighting so the graphics look very real 100 percent real
 i also added very good custom sound effects
