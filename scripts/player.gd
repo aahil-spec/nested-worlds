@@ -28,18 +28,17 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y=jump_velocity
 	#walking
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var input_dir=Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+	var direction=(transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
 	
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		velocity.x=direction.x*speed
+		velocity.z=direction.z*speed
 		
-		$Character/Node.rotation.y = lerp_angle($Character/Node.rotation.y, atan2(-input_dir.x, -input_dir.y), 10.0 * delta)
-		
+		$Character.rotation.y = lerp_angle($Character.rotation.y, atan2(input_dir.x, input_dir.y), 10.0 * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		velocity.x=move_toward(velocity.x,0,speed)
+		velocity.z=move_toward(velocity.z,0,speed)
 		
 	move_and_slide()
 	update_animation()
@@ -84,8 +83,7 @@ func pick_up_orb():
 			orb.reparent(hold_position)
 			orb.position=Vector3.ZERO
 			held_orb=orb
-			if orb.world_id=="red_world":
-				GameState.set_state("carrying_red_orb",true)
+			GameState.set_state("carrying_any_orb",true)
 			return
 #drop orb
 func drop_orb():
@@ -94,8 +92,7 @@ func drop_orb():
 	var orb=held_orb
 	held_orb=null
 	
-	if orb.world_id=="red_world":
-		GameState.set_state("carrying_red_orb",false)
+	GameState.set_state("carrying_any_orb",false)
 
 	var touching_areas=interact_reach.get_overlapping_areas()
 	for area in touching_areas:

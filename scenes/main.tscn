@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://df1l757yibrmo" path="res://scenes/orb.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cqvxkmugmonqj" path="res://scenes/exit_pad.tscn" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://dpvn411xwtoj2" path="res://scenes/red_bridge.tscn" id="6_tipki"]
-[ext_resource type="Material" uid="uid://r6jn01ope8fu" path="res://resource/blue_paint.tres" id="7_85g3d"]
 [ext_resource type="PackedScene" uid="uid://c82lxqt6r6lx4" path="res://scenes/pressure_plate.tscn" id="7_o6xl0"]
-[ext_resource type="Script" uid="uid://cwnflv1ng8w8" path="res://scripts/win_zone.gd" id="9_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://2i8udfe1ys7e" path="res://scenes/vault_door.tscn" id="9_trceg"]
 [ext_resource type="Material" uid="uid://gciv61oh8r3u" path="res://resource/red_paint.tres" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://di4hkgulitbuc" path="res://scenes/death_plane.tscn" id="10_trceg"]
@@ -19,8 +17,7 @@
 [ext_resource type="Script" uid="uid://rpu1aujnht57" path="res://scripts/sequence_manager.gd" id="13_0ld40"]
 [ext_resource type="Shader" uid="uid://c8pov6nbe6snr" path="res://shaders/main.gdshader" id="14_a8y0u"]
 [ext_resource type="Script" uid="uid://cpc0tccyhgmuc" path="res://scripts/glass_case.gd" id="15_muem4"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_a8y0u"]
+[ext_resource type="Script" uid="uid://ekj3x5avtk17" path="res://scripts/puzzle_manager.gd" id="17_0ld40"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_trceg"]
 sky_top_color = Color(0.101960786, 0.05882353, 0, 1)
@@ -41,8 +38,9 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.008
 volumetric_fog_albedo = Color(1, 0.9098039, 0.0627451, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ld40"]
-albedo_color = Color(0.13348675, 0.43947625, 3.85046e-07, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muem4"]
+transparency = 1
+albedo_color = Color(0.63539076, 0.63539076, 0.63539076, 0.28235295)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
 albedo_color = Color(0.62448967, 0.017314509, 0.1772303, 1)
@@ -61,9 +59,19 @@ volumetric_fog_albedo = Color(1, 0.13333334, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
 albedo_color = Color(0.105882354, 0.44313726, 0.6039216, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muem4"]
-transparency = 1
-albedo_color = Color(0.63539076, 0.63539076, 0.63539076, 0.28235295)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ld40"]
+albedo_color = Color(0.13348675, 0.43947625, 3.85046e-07, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0ld40"]
+height = 519.13477
+radius = 4096.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gqmmt"]
+radius = 411.1411
+height = 2691.7427
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp3eg"]
+albedo_color = Color(0.23137255, 0.09411765, 0.09019608, 1)
 
 [sub_resource type="Animation" id="Animation_o5qli"]
 length = 0.001
@@ -144,7 +152,7 @@ size = Vector3(24.229248, 1, 11.950439)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
 
 [node name="Socket" parent="Worlds/HubWorld" unique_id=868451419 instance=ExtResource("3_jyhfs")]
-transform = Transform3D(0.999974, 0, 0.0071732365, 0, 1, 0, -0.0071732365, 0, 0.999974, 2.5361845, 0.6919751, 27.42642)
+transform = Transform3D(-4.371138e-08, 0, -0.9999998, 0, 1, 0, 0.9999998, 0, -4.371138e-08, 3.2199728, 0.6919751, 14.730259)
 
 [node name="IslandTwo" type="CSGBox3D" parent="Worlds/HubWorld" unique_id=702364821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.900957)
@@ -153,13 +161,6 @@ size = Vector3(20, 1, 10)
 
 [node name="RedBridge" parent="Worlds/HubWorld" unique_id=1398792709 instance=ExtResource("6_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3, 0.06315136, 0.49815297, 1.1520219)
-
-[node name="WinZone" type="Area3D" parent="Worlds/HubWorld" unique_id=450417437]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8001254, -13.493108)
-script = ExtResource("9_eb6dy")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Worlds/HubWorld/WinZone" unique_id=1104785105]
-shape = SubResource("BoxShape3D_a8y0u")
 
 [node name="VaultDoor" parent="Worlds/HubWorld" unique_id=1843638876 instance=ExtResource("9_trceg")]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0.6313987, 2.84838, 10.430675)
@@ -180,118 +181,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0571591, 28.725195)
 [node name="MeshInstance3D" parent="Worlds/HubWorld/RedOrb" index="0" unique_id=269650458]
 surface_material_override/0 = ExtResource("10_choun")
 
-[node name="GreenOrb" parent="Worlds/HubWorld" unique_id=1184344345 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1802254, 0.823452, 16.962517)
+[node name="Orb" parent="Worlds/HubWorld" unique_id=1942573228 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13547945, 0.823452, -13.29014)
 world_id = "green_world"
 
-[node name="GreenWorld" type="Node3D" parent="Worlds" unique_id=1310208881]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6000, 0, 0)
-
-[node name="Floor" type="CSGBox3D" parent="Worlds/GreenWorld" unique_id=1493708439]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7266383, -0.025018692, 22.10851)
+[node name="GlassCase" type="CSGBox3D" parent="Worlds/HubWorld" unique_id=1283820502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19456148, 0.94197464, -13.29014)
 use_collision = true
-size = Vector3(100, 1, 100)
-material = SubResource("StandardMaterial3D_0ld40")
-
-[node name="EntryPad" type="Marker3D" parent="Worlds/GreenWorld" unique_id=1560851333]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
-
-[node name="WinZone" type="Area3D" parent="Worlds/GreenWorld" unique_id=7375835]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8001254, -13.493108)
-script = ExtResource("9_eb6dy")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Worlds/GreenWorld/WinZone" unique_id=407177073]
-shape = SubResource("BoxShape3D_a8y0u")
-
-[node name="DeathPlane" parent="Worlds/GreenWorld" unique_id=625447326 instance=ExtResource("10_trceg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/GreenWorld" unique_id=277472025]
-environment = SubResource("Environment_jkv2x")
-
-[node name="Sketchfab_Scene" parent="Worlds/GreenWorld" unique_id=373174561 instance=ExtResource("11_dp3eg")]
-transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0.25018978, 23.990305)
-
-[node name="SequenceManager" type="Node3D" parent="Worlds/GreenWorld" unique_id=1525720816 groups=["sequence_manager"]]
-script = ExtResource("13_0ld40")
-
-[node name="sun" parent="Worlds/GreenWorld" unique_id=514733040 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.519043, 0.49342728, 23.306656)
-plate_symbol = "sun"
-
-[node name="eye" parent="Worlds/GreenWorld" unique_id=1659456337 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14746094, 0.55624104, 17.336699)
-plate_symbol = "eye"
-
-[node name="moon" parent="Worlds/GreenWorld" unique_id=1740666970 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0200195, 0.5013621, 24.756613)
-plate_symbol = "moon"
-
-[node name="star" parent="Worlds/GreenWorld" unique_id=651956841 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5293975, 30.651485)
-plate_symbol = "star"
-
-[node name="Orb" parent="Worlds/GreenWorld" unique_id=312219763 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3007813, 0.646893, 27.561996)
-world_id = "void_world"
-
-[node name="Socket" parent="Worlds/GreenWorld" unique_id=1764912202 instance=ExtResource("3_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5254421, 34.609604)
-
-[node name="VoidWorld" type="Node3D" parent="Worlds" unique_id=2006675478]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8000, 0, 0)
-
-[node name="Floor" type="CSGBox3D" parent="Worlds/VoidWorld" unique_id=1742790566]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7265625, -0.025018692, 2.1505108)
-use_collision = true
-size = Vector3(24.229248, 1, 11.950439)
-
-[node name="EntryPad" type="Marker3D" parent="Worlds/VoidWorld" unique_id=698205390]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92871094, 3.3906384, -2.5592308)
-
-[node name="DeathPlane" parent="Worlds/VoidWorld" unique_id=609681583 instance=ExtResource("10_trceg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/VoidWorld" unique_id=1513397177]
-environment = SubResource("Environment_jkv2x")
-
-[node name="Socket" parent="Worlds/VoidWorld" unique_id=1453932887 instance=ExtResource("3_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71285963, -0.09985161)
-state_key = "game_won"
-
-[node name="Orb" parent="Worlds/VoidWorld" unique_id=2063772755 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1746616, -7.538064)
-world_id = "HubWorld"
-
-[node name="BlueMicroWorld" type="Node3D" parent="Worlds" unique_id=297455693]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10000, 0, 0)
-
-[node name="Lever" parent="Worlds/BlueMicroWorld" unique_id=644434233 instance=ExtResource("11_jbj1t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.812757)
-
-[node name="Floor" type="CSGBox3D" parent="Worlds/BlueMicroWorld" unique_id=283585945]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7266383, -0.025018692, 22.10851)
-use_collision = true
-size = Vector3(24.229248, 1, 11.950439)
-
-[node name="EntryPad" type="Marker3D" parent="Worlds/BlueMicroWorld" unique_id=2145436075]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23925781, 5.681964, 22.02047)
-
-[node name="DeathPlane" parent="Worlds/BlueMicroWorld" unique_id=231941779 instance=ExtResource("10_trceg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/BlueMicroWorld" unique_id=381922004]
-environment = SubResource("Environment_jkv2x")
-
-[node name="ExitPad" parent="Worlds/BlueMicroWorld" unique_id=713389487 instance=ExtResource("4_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48854303, 12.117043)
+material = SubResource("StandardMaterial3D_muem4")
+script = ExtResource("15_muem4")
 
 [node name="RedWorld" type="Node3D" parent="Worlds" unique_id=792713333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, 0, 0)
 
+[node name="BlueOrb" parent="Worlds/RedWorld" unique_id=728886644 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.892344, 0)
+world_id = "blue_world"
+
 [node name="Floor" type="CSGBox3D" parent="Worlds/RedWorld" unique_id=1080872867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1210938, 0, 0)
 use_collision = true
-size = Vector3(20, 1, 20)
+size = Vector3(15.75769, 1, 20)
+material = SubResource("StandardMaterial3D_o5qli")
+
+[node name="Floor2" type="CSGBox3D" parent="Worlds/RedWorld" unique_id=1142504412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.091919, 0, -1.0075073)
+use_collision = true
+size = Vector3(6.819763, 1, 9.693237)
 material = SubResource("StandardMaterial3D_o5qli")
 
 [node name="EntryPad" type="Marker3D" parent="Worlds/RedWorld" unique_id=1540762534]
@@ -310,15 +226,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 environment = SubResource("Environment_trceg")
 
 [node name="BlueSocket" parent="Worlds/RedWorld" unique_id=72264646 instance=ExtResource("3_jyhfs")]
-transform = Transform3D(-0.07880714, 0, 0.9968899, 0, 1, 0, -0.9968899, 0, -0.07880714, -1.064331, 0.87963724, 7.0617914)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 24.452637, 0.42307258, 1.6969957)
 
-[node name="BlueOrb" parent="Worlds/RedWorld" unique_id=218453924 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9058056, 1.184063, -1.4940853)
-world_id = "blue_world"
-power_id = "blue_power"
-
-[node name="MeshInstance3D" parent="Worlds/RedWorld/BlueOrb" index="0" unique_id=269650458]
-material_override = ExtResource("7_85g3d")
+[node name="RedBridge" parent="Worlds/RedWorld" unique_id=1915316340 instance=ExtResource("6_tipki")]
+transform = Transform3D(-4.371139e-08, 0, 3, 0, 1, 0, -1, 0, -1.3113416e-07, 12.186768, 0.33181787, -4.3893104)
 
 [node name="BlueWorld" type="Node3D" parent="Worlds" unique_id=1676064052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4000, 0, 0)
@@ -334,14 +245,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
 [node name="ExitPad" parent="Worlds/BlueWorld" unique_id=1515089408 instance=ExtResource("4_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.57782173, -8.820556)
 
-[node name="Orb" parent="Worlds/BlueWorld" unique_id=1336964174 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.01416, 0.823452, 0)
-world_id = "green_world"
-
 [node name="BlueIslandTwo" type="CSGBox3D" parent="Worlds/BlueWorld" unique_id=1537693935]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.336914)
 use_collision = true
-size = Vector3(20, 1, 10)
+size = Vector3(20, 1, 16.673828)
 
 [node name="RedBridge" parent="Worlds/BlueWorld" unique_id=1449738394 instance=ExtResource("6_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.330412)
@@ -357,18 +264,179 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55758905, -13.32612)
 
 [node name="Orb2" parent="Worlds/BlueWorld" unique_id=1052405416 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.048584, 1.194324, -11.500179)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.048584, 1.194324, 0.18353462)
 world_id = "blue_micro_world"
 
-[node name="Orb3" parent="Worlds/BlueWorld" unique_id=441944447 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2177734, 1.194324, 0.33922386)
-world_id = "blue_micro_world"
+[node name="BlueMicroWorld" type="Node3D" parent="Worlds" unique_id=297455693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10000, 0, 0.21734333)
 
-[node name="GlassCase" type="CSGBox3D" parent="Worlds/BlueWorld" unique_id=884510645]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.073242, 0.94197464, 0)
+[node name="Lever" parent="Worlds/BlueMicroWorld" unique_id=644434233 instance=ExtResource("11_jbj1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.3590975)
+
+[node name="Floor" type="CSGBox3D" parent="Worlds/BlueMicroWorld" unique_id=283585945]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7265625, -0.025018692, -1.0633459)
 use_collision = true
-material = SubResource("StandardMaterial3D_muem4")
-script = ExtResource("15_muem4")
+size = Vector3(24.229248, 1, 11.950439)
+
+[node name="EntryPad" type="Marker3D" parent="Worlds/BlueMicroWorld" unique_id=2145436075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23925781, 5.681964, -1.1513853)
+
+[node name="DeathPlane" parent="Worlds/BlueMicroWorld" unique_id=231941779 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, -23.171852)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/BlueMicroWorld" unique_id=381922004]
+environment = SubResource("Environment_jkv2x")
+
+[node name="ExitPad" parent="Worlds/BlueMicroWorld" unique_id=713389487 instance=ExtResource("4_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48854303, -11.0548115)
+
+[node name="GreenWorld" type="Node3D" parent="Worlds" unique_id=1310208881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6000, 0, 0)
+
+[node name="Floor" type="CSGBox3D" parent="Worlds/GreenWorld" unique_id=1493708439]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7266383, -0.025018692, 22.10851)
+use_collision = true
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_0ld40")
+
+[node name="EntryPad" type="Marker3D" parent="Worlds/GreenWorld" unique_id=1560851333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09767, 2.1285267, 0)
+
+[node name="DeathPlane" parent="Worlds/GreenWorld" unique_id=625447326 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+
+[node name="Sketchfab_Scene" parent="Worlds/GreenWorld" unique_id=373174561 instance=ExtResource("11_dp3eg")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0.25018978, 23.990305)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Worlds/GreenWorld/Sketchfab_Scene" unique_id=1009395804]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=1370183096]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 437.20062, 0)
+shape = SubResource("CylinderShape3D_0ld40")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=2081910304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3724, 2729.5972, -270.01563)
+shape = SubResource("CapsuleShape3D_gqmmt")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=402592859]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2777, 2729.5972, 2503.9238)
+shape = SubResource("CapsuleShape3D_gqmmt")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=1149801640]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -336, 2729.5972, 3711.3262)
+shape = SubResource("CapsuleShape3D_gqmmt")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=541891746]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2346, 2729.5972, 2872.791)
+shape = SubResource("CapsuleShape3D_gqmmt")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=1750667930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3652, 2729.5972, 244.63867)
+shape = SubResource("CapsuleShape3D_gqmmt")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=1136979591]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2838.5, 2729.5972, -2410.1543)
+shape = SubResource("CapsuleShape3D_gqmmt")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=589853240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 259.5, 2729.5972, -3710.3535)
+shape = SubResource("CapsuleShape3D_gqmmt")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=92170338]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2311.5, 2729.5972, -2765.5254)
+shape = SubResource("CapsuleShape3D_gqmmt")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="Worlds/GreenWorld/Sketchfab_Scene/StaticBody3D" unique_id=1600333264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 1442.9678, -72.083984)
+shape = SubResource("CapsuleShape3D_gqmmt")
+
+[node name="SequenceManager" type="Node3D" parent="Worlds/GreenWorld" unique_id=1525720816 groups=["sequence_manager"]]
+script = ExtResource("13_0ld40")
+
+[node name="Orb" parent="Worlds/GreenWorld" unique_id=312219763 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0009766, 2.791792, 23.886898)
+world_id = "void_world"
+
+[node name="Socket" parent="Worlds/GreenWorld" unique_id=1764912202 instance=ExtResource("3_jyhfs")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.5254421, 65.53513)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/GreenWorld" unique_id=1028044149]
+environment = SubResource("Environment_jkv2x")
+
+[node name="PuzzleManager" type="Node3D" parent="Worlds/GreenWorld" unique_id=1322581319]
+script = ExtResource("17_0ld40")
+
+[node name="SunPlate" parent="Worlds/GreenWorld/PuzzleManager" unique_id=514733040 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.519043, 0.49342728, 23.306656)
+plate_symbol = "sun"
+
+[node name="EyePlate" parent="Worlds/GreenWorld/PuzzleManager" unique_id=1659456337 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14746094, 0.55624104, 17.336699)
+plate_symbol = "eye"
+
+[node name="MoonPlate" parent="Worlds/GreenWorld/PuzzleManager" unique_id=1740666970 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0200195, 0.5013621, 24.756613)
+plate_symbol = "moon"
+
+[node name="StarPlate" parent="Worlds/GreenWorld/PuzzleManager" unique_id=651956841 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5293975, 30.651485)
+plate_symbol = "star"
+
+[node name="VoidWorld" type="Node3D" parent="Worlds" unique_id=2006675478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8000, 0, 0)
+
+[node name="Floor" type="CSGBox3D" parent="Worlds/VoidWorld" unique_id=1742790566]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7265625, -0.025018692, 2.1505108)
+use_collision = true
+size = Vector3(24.229248, 1, 11.950439)
+material = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="Floor2" type="CSGBox3D" parent="Worlds/VoidWorld" unique_id=328798906]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7265625, 6.3004246, 2.1505108)
+use_collision = true
+size = Vector3(24.229248, 1, 11.950439)
+material = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="Floor3" type="CSGBox3D" parent="Worlds/VoidWorld" unique_id=447719668]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 6.86084, 3.544613, 2.1505108)
+use_collision = true
+size = Vector3(24.229248, 1, 6.602051)
+material = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="Floor4" type="CSGBox3D" parent="Worlds/VoidWorld" unique_id=1622705272]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -5.727539, 3.544613, 2.1505108)
+use_collision = true
+size = Vector3(24.229248, 1, 6.602051)
+material = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="Floor5" type="CSGBox3D" parent="Worlds/VoidWorld" unique_id=978513036]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.9121094, 3.544613, -10.293368)
+use_collision = true
+size = Vector3(13.2247925, 1, 6.602051)
+material = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="Floor6" type="CSGBox3D" parent="Worlds/VoidWorld" unique_id=381097056]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.9121094, 3.544613, 13.74421)
+use_collision = true
+size = Vector3(13.2247925, 1, 6.602051)
+material = SubResource("StandardMaterial3D_dp3eg")
+
+[node name="EntryPad" type="Marker3D" parent="Worlds/VoidWorld" unique_id=698205390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92871094, 3.3906384, -2.5592308)
+
+[node name="DeathPlane" parent="Worlds/VoidWorld" unique_id=609681583 instance=ExtResource("10_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/VoidWorld" unique_id=1513397177]
+environment = SubResource("Environment_jkv2x")
+
+[node name="Socket" parent="Worlds/VoidWorld" unique_id=1453932887 instance=ExtResource("3_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71285963, -0.09985161)
+state_key = "game_won"
+
+[node name="Orb" parent="Worlds/VoidWorld" unique_id=2063772755 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1746616, -7.538064)
+world_id = "HubWorld"
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=136269747]
 
@@ -421,3 +489,4 @@ environment = SubResource("Environment_jbj1t")
 
 [editable path="Worlds/HubWorld/RedOrb"]
 [editable path="Worlds/RedWorld/BlueOrb"]
+[editable path="Worlds/GreenWorld/Sketchfab_Scene"]

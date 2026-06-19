@@ -1,7 +1,7 @@
 extends StaticBody3D
 
 
-@export var power_key:String="carrying_red_orb"
+@export var power_key:String="carrying_any_orb"
 
 @onready var collision_shape : CollisionShape3D=$CollisionShape3D
 
