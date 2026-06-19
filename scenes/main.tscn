@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cqvxkmugmonqj" path="res://scenes/exit_pad.tscn" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://dpvn411xwtoj2" path="res://scenes/red_bridge.tscn" id="6_tipki"]
 [ext_resource type="PackedScene" uid="uid://c82lxqt6r6lx4" path="res://scenes/pressure_plate.tscn" id="7_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://b4yf5waprihpb" path="res://environment/qwantani_dusk_2_puresky_4k.exr" id="7_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://2i8udfe1ys7e" path="res://scenes/vault_door.tscn" id="9_trceg"]
 [ext_resource type="Material" uid="uid://gciv61oh8r3u" path="res://resource/red_paint.tres" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://di4hkgulitbuc" path="res://scenes/death_plane.tscn" id="10_trceg"]
@@ -22,6 +23,37 @@
 [ext_resource type="AudioStream" uid="uid://bdyyivx5t7x3w" path="res://sound effects/freesound_community-buzz-buzz-95806.mp3" id="18_jscy8"]
 [ext_resource type="AudioStream" uid="uid://b31sq7pq5yo5v" path="res://sound effects/universfield-clear-bell-chime-487898.mp3" id="19_pm3ni"]
 [ext_resource type="AudioStream" uid="uid://cmx3u0e8ki4vg" path="res://sound effects/dragon-studio-whoosh-cinematic-376875.mp3" id="23_pm3ni"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_y6deb"]
+panorama = ExtResource("7_pm3ni")
+
+[sub_resource type="Sky" id="Sky_og1vs"]
+sky_material = SubResource("PanoramaSkyMaterial_y6deb")
+
+[sub_resource type="Environment" id="Environment_2wyq8"]
+background_mode = 2
+sky = SubResource("Sky_og1vs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muem4"]
+transparency = 1
+albedo_color = Color(0.63539076, 0.63539076, 0.63539076, 0.28235295)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
+albedo_color = Color(0.62448967, 0.017314509, 0.1772303, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
+albedo_color = Color(0.105882354, 0.44313726, 0.6039216, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ld40"]
+albedo_color = Color(0.13348675, 0.43947625, 3.85046e-07, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0ld40"]
+height = 519.13477
+radius = 4096.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gqmmt"]
+radius = 411.1411
+height = 2691.7427
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_trceg"]
 sky_top_color = Color(0.101960786, 0.05882353, 0, 1)
@@ -41,38 +73,6 @@ glow_bloom = 0.2
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.008
 volumetric_fog_albedo = Color(1, 0.9098039, 0.0627451, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muem4"]
-transparency = 1
-albedo_color = Color(0.63539076, 0.63539076, 0.63539076, 0.28235295)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
-albedo_color = Color(0.62448967, 0.017314509, 0.1772303, 1)
-
-[sub_resource type="Environment" id="Environment_trceg"]
-background_mode = 1
-background_color = Color(0.050980393, 0, 0, 1)
-ambient_light_color = Color(0.54509807, 0, 0, 1)
-ambient_light_energy = 0.8
-glow_enabled = true
-glow_bloom = 0.5
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.04
-volumetric_fog_albedo = Color(1, 0.13333334, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
-albedo_color = Color(0.105882354, 0.44313726, 0.6039216, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ld40"]
-albedo_color = Color(0.13348675, 0.43947625, 3.85046e-07, 1)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_0ld40"]
-height = 519.13477
-radius = 4096.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gqmmt"]
-radius = 411.1411
-height = 2691.7427
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp3eg"]
 albedo_color = Color(0.23137255, 0.09411765, 0.09019608, 1)
@@ -163,7 +163,7 @@ transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0.6313987, 2.84838, 10.430675
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/HubWorld" unique_id=1388941139]
-environment = SubResource("Environment_jkv2x")
+environment = SubResource("Environment_2wyq8")
 
 [node name="EchoFragment" parent="Worlds/HubWorld" unique_id=1395473077 instance=ExtResource("11_jkv2x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53928566, -0.053355694, 31.386398)
@@ -216,14 +216,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8544922, 0.6785798, -5.578
 [node name="DeathPlane" parent="Worlds/RedWorld" unique_id=299942303 instance=ExtResource("10_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/RedWorld" unique_id=120636460]
-environment = SubResource("Environment_trceg")
-
 [node name="BlueSocket" parent="Worlds/RedWorld" unique_id=72264646 instance=ExtResource("3_jyhfs")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 24.452637, 0.42307258, 1.6969957)
 
 [node name="RedBridge" parent="Worlds/RedWorld" unique_id=1915316340 instance=ExtResource("6_tipki")]
 transform = Transform3D(-4.371139e-08, 0, 3, 0, 1, 0, -1, 0, -1.3113416e-07, 12.186768, 0.33181787, -4.3893104)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/RedWorld" unique_id=1130660872]
+environment = SubResource("Environment_2wyq8")
 
 [node name="BlueWorld" type="Node3D" parent="Worlds" unique_id=1676064052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4000, 0, 0)
@@ -261,6 +261,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55758905, -13.32612)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.048584, 1.194324, 0.18353462)
 world_id = "blue_micro_world"
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/BlueWorld" unique_id=2093820621]
+environment = SubResource("Environment_2wyq8")
+
 [node name="BlueMicroWorld" type="Node3D" parent="Worlds" unique_id=297455693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10000, 0, 0.21734333)
 
@@ -278,11 +281,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23925781, 5.681964, -1.151
 [node name="DeathPlane" parent="Worlds/BlueMicroWorld" unique_id=231941779 instance=ExtResource("10_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, -23.171852)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/BlueMicroWorld" unique_id=381922004]
-environment = SubResource("Environment_jkv2x")
-
 [node name="ExitPad" parent="Worlds/BlueMicroWorld" unique_id=713389487 instance=ExtResource("4_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48854303, -11.0548115)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/BlueMicroWorld" unique_id=1482887580]
+environment = SubResource("Environment_2wyq8")
 
 [node name="GreenWorld" type="Node3D" parent="Worlds" unique_id=1310208881]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6000, 0, 0)
@@ -432,9 +435,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.92871094, 3.3906384, -2.55
 [node name="DeathPlane" parent="Worlds/VoidWorld" unique_id=609681583 instance=ExtResource("10_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/VoidWorld" unique_id=1513397177]
-environment = SubResource("Environment_jkv2x")
-
 [node name="Socket" parent="Worlds/VoidWorld" unique_id=1453932887 instance=ExtResource("3_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71285963, -0.09985161)
 state_key = "game_won"
@@ -443,6 +443,9 @@ state_key = "game_won"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1746616, -7.538064)
 world_id = "HubWorld"
 power_id = ""
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Worlds/VoidWorld" unique_id=1755092146]
+environment = SubResource("Environment_2wyq8")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=136269747]
 

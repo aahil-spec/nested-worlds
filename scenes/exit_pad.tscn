@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cqvxkmugmonqj"]
 
 [ext_resource type="Script" uid="uid://ciulqx8v70nn3" path="res://scripts/exit_pad.gd" id="1_ro4fh"]
+[ext_resource type="AudioStream" uid="uid://cmx3u0e8ki4vg" path="res://sound effects/dragon-studio-whoosh-cinematic-376875.mp3" id="2_sa0m7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bn51m"]
 albedo_color = Color(0.3569411, 0.70762867, 1.3091564e-05, 1)
@@ -17,3 +18,6 @@ material = SubResource("StandardMaterial3D_bn51m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=163980443]
 shape = SubResource("BoxShape3D_ro4fh")
+
+[node name="ExitSound" type="AudioStreamPlayer3D" parent="." unique_id=801771440]
+stream = ExtResource("2_sa0m7")
